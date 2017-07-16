@@ -7,6 +7,13 @@ class GameboardPrinter
     @current_gameboard = Gameboard.new
   end
 
+  def print_whole_board
+    print print_row_a + "\n"
+    print print_row_b + "\n"
+    print print_row_c + "\n"
+    print print_row_d + "\n"
+  end
+
   def print_row_a
     current_row = ""
     @current_gameboard.row_a.each do |space|
