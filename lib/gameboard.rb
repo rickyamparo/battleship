@@ -13,10 +13,12 @@ class Gameboard
   end
 
   def print_whole_board
-    p print_row_a + "\n"
-    p print_row_b + "\n"
-    p print_row_c + "\n"
-    p print_row_d + "\n"
+    current_board = ""
+    current_board += "\n" + print_row_a
+    current_board += "\n" + print_row_b
+    current_board += "\n" + print_row_c
+    current_board += "\n" + print_row_d + "\n" + "\n"
+    print current_board
   end
 
   def print_row_a

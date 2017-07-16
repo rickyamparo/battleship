@@ -6,7 +6,7 @@ class Space
 
   def initialize
     @occupied = false
-    @status = "   "
+    @status = " [ ] "
   end
 
   def boat_placement
@@ -17,9 +17,9 @@ class Space
 
   def space_hit
     if @occupied == true
-      @status = " H "
+      @status = " [H] "
     else
-      @status = " M "
+      @status = " [M] "
     end
   end
 
