@@ -16,9 +16,13 @@ class Space
   end
 
   def space_hit
-    if @status == " "
-      @status = " "
+    if @occupied == true
+      @status = "H"
+    else
+      @status = "M"
     end
   end
+
+  
 
 end

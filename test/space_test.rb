@@ -27,4 +27,15 @@ def test_space_can_have_boat
   assert s.occupied
 end
 
+def test_space_can_be_hit
+  s = Space.new
+  s.space_hit
+  assert_equal "M", s.status
+  s.boat_placement
+  s.space_hit
+  assert_equal "H", s.status
+end
+
+
+
 end
