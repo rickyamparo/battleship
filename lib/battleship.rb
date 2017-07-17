@@ -31,10 +31,31 @@ class Battleship
 
   def boat_sequence
     puts "where would you like your first boat to be placed?"
-    user_input = gets.chomp
-    if @current_board.idmap[user_input] != nil
-      @current_board.board[@current_board.idmap[user_input]].boat_placement
+    first_ship_placement
+  end
+
+  def first_ship_placement
+    first_spot = gets.chomp
+    second_spot = gets.chomp
+    if @current_board.idmap[first_spot] != nil
+      @current_board.board[@current_board.idmap[first_spot]].boat_placement
     else
+      puts "That is not an appropriate space"
+      boat_sequence
+    end
+    if @current_board.idmap[second_spot] != nil
+      @current_board.board[@current_board.idmap[second_spot]].boat_placement
+    else
+      puts "That is not an appropriate space"
+      boat_sequence
+    end
+    if @current_board.idmap[first_spot] == @current_board.idmap[second_spot] + 1 ||
+        @current_board.idmap[first_spot] == @current_board.idmap[second_spot] - 1 ||
+          @current_board.idmap[first_spot] == @current_board.idmap[second_spot] -4 ||
+            @current_board.idmap[first_spot] == @current_board.idmap[second_spot] +4
+            puts "Those two spaces are valid, let's move on to your next ship"
+    else
+      puts "Those two spaces are not next to each other, please try again."
       boat_sequence
     end
   end
