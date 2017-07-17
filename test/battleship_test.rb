@@ -3,7 +3,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-require './lib/Battleship'
+require './lib/battleship'
 
 class Battleship_Test < Minitest::Test
 

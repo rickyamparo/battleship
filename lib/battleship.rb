@@ -1,6 +1,9 @@
 require "pry"
+require './lib/gameboard'
 
 class Battleship
+
+  attr_reader :current_board, :instructions
 
   def initialize
     @instructions = "This is how you play battleship"
@@ -27,7 +30,13 @@ class Battleship
   end
 
   def boat_sequence
+    puts "where would you like your first boat to be placed?"
     user_input = gets.chomp
+    if @current_board.idmap[user_input] != nil
+      @current_board.board[@current_board.idmap[user_input]].boat_placement
+    else
+      boat_sequence
+    end
   end
 
 end
