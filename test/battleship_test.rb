@@ -12,9 +12,12 @@ def test_battleship_exists
   assert_instance_of Battleship, bs
 end
 
-def test_battleship_can_decide_what_to_do
+def test_battleship_can_start_sequence
   bs = Battleship.new
-  bs.decide_what_to_do
+  bs.start_sequence
 end
 
+def test_battleship_can_initiate_boat_sequence
+  bs = Battleship.new
+  bs.boat_sequence
 end

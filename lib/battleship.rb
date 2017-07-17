@@ -4,23 +4,32 @@ class Battleship
 
   def initialize
     @instructions = "This is how you play battleship"
+    @current_board = Gameboard.new
     puts "Would you like to (p)lay a game of Battleship? Read the (i)nstructions or (q)uit?"
   end
 
-  def decide_what_to_do
+  def start_sequence
     player_choice = gets.chomp
     if player_choice == "i"
       puts @instructions
+      start_sequence
     elsif player_choice == "q"
       puts "You have quit the game"
       #design a way for players to quit
     elsif player_choice == "p"
       puts "Let's play a round of battleship"
-      #deisgn a way to access the start of the game
+      #boat_sequence
     else
       puts "Please pick one of the three choices"
       puts "(p)lay, (i)nstructions or (q)uit"
-      decide_what_to_do
+      start_sequence
+    end
+  end
+
+  def boat_sequence
+    user_input = gets.chomp
+    desired_row = user_input[0]
+    16.times()
     end
   end
 
