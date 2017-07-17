@@ -28,9 +28,6 @@ class Battleship
 
   def boat_sequence
     user_input = gets.chomp
-    desired_row = user_input[0]
-    16.times()
-    end
   end
 
 end
