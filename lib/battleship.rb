@@ -37,18 +37,30 @@ class Battleship
   def first_ship_placement
     first_spot = gets.chomp
     second_spot = gets.chomp
+    first_spot_placement(first_spot)
+    second_spot_placement(second_spot)
+    first_ship_validator(first_spot, second_spot)
+  end
+
+  def first_spot_placement(first_spot)
     if @current_board.idmap[first_spot] != nil
       @current_board.board[@current_board.idmap[first_spot]].boat_placement
     else
       puts "That is not an appropriate space"
       boat_sequence
     end
+  end
+
+  def second_spot_placement(second_spot)
     if @current_board.idmap[second_spot] != nil
       @current_board.board[@current_board.idmap[second_spot]].boat_placement
     else
       puts "That is not an appropriate space"
       boat_sequence
     end
+  end
+
+  def first_ship_validator(first_spot, second_spot)
     if @current_board.idmap[first_spot] == @current_board.idmap[second_spot] + 1 ||
         @current_board.idmap[first_spot] == @current_board.idmap[second_spot] - 1 ||
           @current_board.idmap[first_spot] == @current_board.idmap[second_spot] -4 ||
