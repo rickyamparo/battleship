@@ -1,5 +1,6 @@
 require 'pry'
 require './lib/gameboard'
+require './lib/first_ship'
 
 class Player
 
@@ -10,9 +11,9 @@ class Player
   end
 
   def boat_sequence
-    puts "Where would you like your first boat's first spot placed?"
+    puts "Where would you like your first boat's, first spot placed?"
     first_ship_placement
-    puts "Where would you like your second boat's first spot placed?"
+    puts "Where would you like your second boat's, first spot placed?"
     second_ship_placement
   end
 
@@ -31,16 +32,12 @@ class Player
     second_spot = gets.chomp
     puts "what's your last spot?"
     third_spot = gets.chomp
-    if @player_board.board[@player_board.idmap[first_spot]].occupied == false
-      first_spot_placement(first_spot)
-    else
-      puts "That place is already occupied, let's try the second ship again"
-      second_ship_placement
-    end
+    second_validator(first_spot, second_spot)
+    first_spot_placement(first_spot)
+    second_validator(second_spot, third_spot)
     second_spot_placement(second_spot)
-    first_validator(first_spot, second_spot)
+    # second_validator(second_spot, third_spot)
     third_spot_placement(third_spot)
-    first_validator(second_spot, third_spot)
   end
 
   def first_spot_placement(first_spot)
@@ -77,14 +74,36 @@ class Player
     if (@player_board.idmap[first_spot] == @player_board.idmap[second_spot] + 1 ||
         @player_board.idmap[first_spot] == @player_board.idmap[second_spot] - 1 ||
           @player_board.idmap[first_spot] == @player_board.idmap[second_spot] - 4 ||
-            @player_board.idmap[first_spot] == @player_board.idmap[second_spot] + 4) &&
-              (@player_board.idmap[first_spot] % 4 == 3 && @player_board.idmap[second_spot] % 4 != 0 &&
-                @player_board.idmap[second_spot] % 4 == 3 && @player_board.idmap[first_spot] % 4 != 0)
+            @player_board.idmap[first_spot] == @player_board.idmap[second_spot] + 4)
     else
       puts "Those spaces are not valid, please try again."
       first_ship_placement
     end
+    if @player_board.idmap[first_spot] % 4 == 3 && @player_board.idmap[second_spot] % 4 == 0 ||
+      @player_board.idmap[second_spot] % 4 == 3 && @player_board.idmap[first_spot] % 4 == 0
+      puts "Those spaces are not valid, please try again"
+      first_ship_placement
+    end
     puts "Those spaces are valid, let's move on."
+  end
+
+  def second_validator(first_spot, second_spot)
+    if (@player_board.board[@player_board.idmap[first_spot]].occupied == false)
+      if (@player_board.idmap[first_spot] == @player_board.idmap[second_spot] + 1 ||
+          @player_board.idmap[first_spot] == @player_board.idmap[second_spot] - 1 ||
+            @player_board.idmap[first_spot] == @player_board.idmap[second_spot] - 4 ||
+              @player_board.idmap[first_spot] == @player_board.idmap[second_spot] + 4)
+      else
+        puts "Those spaces are not valid, please try again."
+        second_ship_placement
+      end
+      if (@player_board.idmap[first_spot] % 4 == 3 && @player_board.idmap[second_spot] % 4 == 0 ||
+          @player_board.idmap[second_spot] % 4 == 3 && @player_board.idmap[first_spot] % 4 == 0)
+          puts "Those spaces are not valid, please try again."
+          second_ship_placement
+      end
+      puts "Those spaces are valid, let's move on."
+    end
   end
 
 end
