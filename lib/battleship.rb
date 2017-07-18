@@ -7,7 +7,6 @@ class Battleship
 
   def initialize
     @instructions = "This is how you play battleship"
-    @current_board = Gameboard.new
     puts "Would you like to (p)lay a game of Battleship? Read the (i)nstructions or (q)uit?"
   end
 
