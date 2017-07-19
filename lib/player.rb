@@ -1,6 +1,5 @@
 require 'pry'
 require './lib/gameboard'
-require './lib/first_ship'
 
 class Player
 
@@ -8,18 +7,19 @@ class Player
 
   def initialize
     @player_board = Gameboard.new
+    ship_sequence
   end
 
-  def boat_sequence
-    puts "Where would you like your first boat's, first spot placed?"
+  def ship_sequence
+    puts "Where would you like your first ship's, first spot placed?"
     first_ship_placement
-    puts "Where would you like your second boat's, first spot placed?"
+    puts "Where would you like your second ship's, first spot placed?"
     second_ship_placement
   end
 
   def first_ship_placement
     first_spot = gets.chomp
-    puts "What's your first boat's last spot?"
+    puts "What's your first ship's last spot?"
     second_spot = gets.chomp
     first_spot_placement(first_spot)
     second_spot_placement(second_spot)
@@ -38,11 +38,12 @@ class Player
     second_spot_placement(second_spot)
     # second_validator(second_spot, third_spot)
     third_spot_placement(third_spot)
+    puts "Those spaces are valid."
   end
 
   def first_spot_placement(first_spot)
     if @player_board.idmap[first_spot] != nil
-      @player_board.board[@player_board.idmap[first_spot]].boat_placement
+      @player_board.board[@player_board.idmap[first_spot]].ship_placement
     else
       puts "That is not an appropriate space"
       first_spot_placement(first_spot)
@@ -52,7 +53,7 @@ class Player
   def second_spot_placement(second_spot)
     if @player_board.idmap[second_spot] != nil
       #if the value of the second_spot in the hash is not nil(has to be between 0-15)
-      @player_board.board[@player_board.idmap[second_spot]].boat_placement
+      @player_board.board[@player_board.idmap[second_spot]].ship_placement
       #Check the space at location of the second_spot key
     else
       puts "That is not an appropriate space"
@@ -63,7 +64,7 @@ class Player
 
   def third_spot_placement(third_spot)
     if @player_board.idmap[third_spot] != nil
-      @player_board.board[@player_board.idmap[third_spot]].boat_placement
+      @player_board.board[@player_board.idmap[third_spot]].ship_placement
     else
       puts "That is not an appropriate space"
       third_spot_placement(third_spot)
@@ -84,7 +85,6 @@ class Player
       puts "Those spaces are not valid, please try again"
       first_ship_placement
     end
-    puts "Those spaces are valid, let's move on."
   end
 
   def second_validator(first_spot, second_spot)
@@ -102,7 +102,8 @@ class Player
           puts "Those spaces are not valid, please try again."
           second_ship_placement
       end
-      puts "Those spaces are valid, let's move on."
+    else
+      second_ship_placement
     end
   end
 

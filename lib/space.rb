@@ -9,7 +9,7 @@ class Space
     @status = " [ ] "
   end
 
-  def boat_placement
+  def ship_placement
     if @occupied == false
       @occupied = true
     end

@@ -16,7 +16,7 @@ class Gameboard
               "D1" => 12,"D2" => 13,"D3" => 14,"D4" => 15}
   end
 
-  def print_whole_board
+  def print_board
     print_board = "\n"
     print_board += generate_row_a + "\n"
     print_board += generate_row_b + "\n"
