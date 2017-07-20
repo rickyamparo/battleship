@@ -8,21 +8,21 @@ class Battleship
   attr_reader :current_board, :player, :computer, :computer_choices
 
   def initialize
-    @instructions = "This is how you play battleship"
     @player = nil
     @computer = nil
     @computer_choices = *(0...16)
     puts "Would you like to (p)lay a game of Battleship? Read the (i)nstructions or (q)uit?"
+    start_sequence
   end
 
   def start_sequence
     player_choice = gets.chomp
     if player_choice == "i"
-      puts @instructions
+      puts "This is how you play battleship"
+      puts "Would you like to (p)lay a game of Battleship? Read the (i)nstructions or (q)uit?"
       start_sequence
     elsif player_choice == "q"
       puts "You have quit the game"
-      #design a way for players to quit
     elsif player_choice == "p"
       puts "Let's play a round of battleship"
       create_players
@@ -42,10 +42,15 @@ class Battleship
   def player_turn
     puts "where would you like to shoot?"
     guess = gets.chomp
-    @computer.computer_board.board[@computer.computer_board.idmap[guess]].space_hit
-    puts "Enemy Board"
-    @computer.computer_board.print_board
-    hit_check(@computer.computer_board.board)
+    if @computer.computer_board.idmap[guess] != nil
+      @computer.computer_board.board[@computer.computer_board.idmap[guess]].space_hit
+      puts "\n" + "Enemy Board"
+      @computer.computer_board.print_board
+      puts "This player has been hit " + hit_check(@computer.computer_board.board).to_s + " times."
+    else
+      puts "That was not a valid shot"
+      player_turn
+    end
   end
 
   def computer_turn
@@ -54,7 +59,7 @@ class Battleship
     @computer_choices.delete(random_hit)
     puts "\n" + "Your board"
     @player.player_board.print_board
-    hit_check(@player.player_board.board)
+    puts "This player has been hit " + hit_check(@player.player_board.board).to_s + " times."
   end
 
   def hit_check(board)
@@ -64,7 +69,8 @@ class Battleship
         hit_tracker += 1
       end
     end
-    puts "This player has been hit #{hit_tracker} times."
+    hit_tracker
+    # puts "This player has been hit #{hit_tracker} times."
   end
 
 

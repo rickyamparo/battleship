@@ -18,11 +18,11 @@ class Gameboard
 
   def print_board
     board = ""
-    board += ".   A    B    C    D  " + "\n"
-    board += "1 " + generate_row_a + "\n"
-    board += "2 " + generate_row_b + "\n"
-    board += "3 " + generate_row_c + "\n"
-    board += "4 " + generate_row_d + "\n"
+    board += ".   1    2    3    4  " + "\n"
+    board += "A " + generate_row_a + "\n"
+    board += "B " + generate_row_b + "\n"
+    board += "C " + generate_row_c + "\n"
+    board += "D " + generate_row_d + "\n"
     print board
   end
 
