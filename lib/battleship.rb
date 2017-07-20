@@ -5,12 +5,13 @@ require './lib/computer'
 
 class Battleship
 
-  attr_reader :current_board, :player, :computer
+  attr_reader :current_board, :player, :computer, :computer_choices
 
   def initialize
     @instructions = "This is how you play battleship"
     @player = nil
     @computer = nil
+    @computer_choices = *(0...16)
     puts "Would you like to (p)lay a game of Battleship? Read the (i)nstructions or (q)uit?"
   end
 
@@ -42,7 +43,30 @@ class Battleship
     puts "where would you like to shoot?"
     guess = gets.chomp
     @computer.computer_board.board[@computer.computer_board.idmap[guess]].space_hit
+    puts "Enemy Board"
     @computer.computer_board.print_board
+    hit_check(@computer.computer_board.board)
   end
+
+  def computer_turn
+    random_hit = @computer_choices.sample
+    @player.player_board.board[random_hit].space_hit
+    @computer_choices.delete(random_hit)
+    puts "\n" + "Your board"
+    @player.player_board.print_board
+    hit_check(@player.player_board.board)
+  end
+
+  def hit_check(board)
+    hit_tracker = 0
+    board.each do |space|
+      if space.status == " [H] "
+        hit_tracker += 1
+      end
+    end
+    puts "This player has been hit #{hit_tracker} times."
+  end
+
+
 
 end

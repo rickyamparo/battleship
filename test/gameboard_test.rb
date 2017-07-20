@@ -31,7 +31,7 @@ class Gameboard_test < Minitest::Test
   def test_gameboard_can_print_whole_board
     skip
     gb = Gameboard.new
-    assert_equal "", gb.print_whole_board
+    assert_equal "", gb.print_board
   end
 
 end

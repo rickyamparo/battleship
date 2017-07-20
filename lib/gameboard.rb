@@ -17,12 +17,13 @@ class Gameboard
   end
 
   def print_board
-    print_board = "\n"
-    print_board += generate_row_a + "\n"
-    print_board += generate_row_b + "\n"
-    print_board += generate_row_c + "\n"
-    print_board += generate_row_d + "\n"
-    print_board
+    board = ""
+    board += ".   A    B    C    D  " + "\n"
+    board += "1 " + generate_row_a + "\n"
+    board += "2 " + generate_row_b + "\n"
+    board += "3 " + generate_row_c + "\n"
+    board += "4 " + generate_row_d + "\n"
+    print board
   end
 
   def generate_row_a

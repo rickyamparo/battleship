@@ -33,10 +33,10 @@ class Player
     puts "what's your last spot?"
     third_spot = gets.chomp
     second_validator(first_spot, second_spot)
-    first_spot_placement(first_spot)
     second_validator(second_spot, third_spot)
+    third_spot_validator(first_spot, third_spot)
+    first_spot_placement(first_spot)
     second_spot_placement(second_spot)
-    # second_validator(second_spot, third_spot)
     third_spot_placement(third_spot)
     puts "Those spaces are valid."
   end
@@ -52,13 +52,10 @@ class Player
 
   def second_spot_placement(second_spot)
     if @player_board.idmap[second_spot] != nil
-      #if the value of the second_spot in the hash is not nil(has to be between 0-15)
       @player_board.board[@player_board.idmap[second_spot]].ship_placement
-      #Check the space at location of the second_spot key
     else
       puts "That is not an appropriate space"
       second_spot_placement(second_spot)
-      #start this whole process again, if it's not in the space then
     end
   end
 
@@ -103,6 +100,28 @@ class Player
           second_ship_placement
       end
     else
+      puts "Those spaces are not valid, please try again."
+      second_ship_placement
+    end
+  end
+
+  def third_spot_validator(first_spot, third_spot)
+    if (@player_board.board[@player_board.idmap[first_spot]].occupied == false)
+      if (@player_board.idmap[first_spot] == @player_board.idmap[third_spot] + 2 ||
+          @player_board.idmap[first_spot] == @player_board.idmap[third_spot] - 2 ||
+            @player_board.idmap[first_spot] == @player_board.idmap[third_spot] - 8 ||
+              @player_board.idmap[first_spot] == @player_board.idmap[third_spot] + 8)
+      else
+        puts "Those spaces are not valid, please try again."
+        second_ship_placement
+      end
+      if (@player_board.idmap[first_spot] % 4 == 3 && @player_board.idmap[third_spot] % 4 == 1 ||
+          @player_board.idmap[third_spot] % 4 == 0 && @player_board.idmap[first_spot] % 4 == 2)
+          puts "Those spaces are not valid, please try again."
+          second_ship_placement
+      end
+    else
+      puts "Those spaces are not valid, please try again."
       second_ship_placement
     end
   end

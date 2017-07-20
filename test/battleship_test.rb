@@ -5,7 +5,7 @@ require 'minitest/pride'
 
 require './lib/battleship'
 
-class Battleship_Test < Minitest::Test
+class BattleshipTest < Minitest::Test
 
   def test_battleship_exists
     bs = Battleship.new
